@@ -4,7 +4,7 @@ using System.Drawing;
 namespace TileEditor
 {
     [Serializable]
-    public struct TileDefinition
+    public struct TileDefinition : IWorldDefinition
     {
         public static TileDefinition Default { get; } = new TileDefinition("Default", false)
         {

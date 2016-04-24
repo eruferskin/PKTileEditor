@@ -12,6 +12,7 @@ namespace TileEditor
         private World _world;
 
         private TileDefinition _seletedTile;
+        private ActorDefinition _selectedActor;
         private int _numberOfColumns;
         private int _numberOfRows;
         private const int _defaultRows = 10;
@@ -29,8 +30,14 @@ namespace TileEditor
                 brushSelect.Items.Add(brush.Name);
             }
 
+            foreach(var actor in ActorProvider.GetAll())
+            {
+                actorSelect.Items.Add(actor.Name);
+            }
+
             _seletedTile = TileDefinition.Default;
             brushSelect.SelectedIndex = 0;
+            actorSelect.SelectedIndex = 0;
             btnSave.Enabled = false;
         }
 
@@ -44,7 +51,7 @@ namespace TileEditor
             {
                 for (int y = 0; y < _world.Height; y++)
                 {
-                    _world.SetTile(x, y, TileDefinition.Default);
+                    _world.SetItem(x, y, TileDefinition.Default);
                 }
             }
         }
@@ -82,10 +89,18 @@ namespace TileEditor
                     int offsetLeft = tileWidth * column;
 
                     var tile = TileDefinition.Default;
+                    
 
                     if (_world != null)
                     {
-                        tile = _world.GetTile(column, row);
+                        if (tabControl.SelectedTab.Name == "tabGrid")
+                        {
+                            tile = (TileDefinition)_world.GetItem(column, row);
+                        }
+                         else
+                        {
+                            tile = (TileDefinition)_world.GetItem(column, row);
+                        }  
                     }
 
                     var panel = new Panel
@@ -113,6 +128,7 @@ namespace TileEditor
 
         private void tile_Click(object sender, EventArgs e)
         {
+            
             var tile = (Panel)sender;
 
             var tileIndex = tile.Parent.Controls.IndexOf(tile);
@@ -135,14 +151,31 @@ namespace TileEditor
 
                 x = columnNumber - 1;
                 y = rowNumber - 1;
-                
-                _world.SetTile(x, y, _seletedTile);
+
+                if (tabControl.SelectedTab.Name == "tabGrid")
+                {
+                    _world.SetItem(x, y, _seletedTile);
+                    tile.BackColor = _seletedTile.EditorColor;
+                }
+                else if (tabControl.SelectedTab.Name == "tabActors")
+                {
+                    _world.SetItem(x, y, _selectedActor);
+                    var label = new Label()
+                    {
+                        Text = _selectedActor.Name,
+                        AutoSize = false,
+                        Dock = DockStyle.Fill
+                    };
+
+                    label.Parent = tile;
+                }
+               
             }
 
-            tile.BackColor = _seletedTile.EditorColor;
+           
         }
 
-        private void SerializeWorld(Stream stream)
+        private void SerializeItem(Stream stream)
         {
             var selector = new SurrogateSelector();
             var context = new StreamingContext(StreamingContextStates.All);
@@ -151,7 +184,7 @@ namespace TileEditor
             formatter.Serialize(stream, _world);
         }
 
-        private World DeserializeWorld(Stream stream)
+        private World DeserializeItem(Stream stream)
         {
             var selector = new SurrogateSelector();
             var context = new StreamingContext(StreamingContextStates.All);
@@ -192,7 +225,7 @@ namespace TileEditor
 
                 using (var stream = new FileStream(fileName, FileMode.Create))
                 {
-                    SerializeWorld(stream);
+                    SerializeItem(stream);
                 }
             }
         }
@@ -212,7 +245,7 @@ namespace TileEditor
                 {
                     Text = "Loading...";
 
-                    var world = DeserializeWorld(stream);
+                    var world = DeserializeItem(stream);
 
                     _world = world;
 
@@ -221,6 +254,52 @@ namespace TileEditor
                     _numberOfColumns = _world.Width > 0 ? _world.Width : _defaultColumns;
                     _numberOfRows = _world.Height > 0 ? _world.Height : _defaultRows;
                     Text = "TileEdit - " + fileName;
+                }
+            }
+        }
+
+        private void actorSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedActorName = (string)actorSelect.SelectedItem;
+            var selectedActor = ActorProvider.GetActor(selectedActorName);
+
+            _selectedActor = selectedActor;
+        }
+
+        private void btnSaveActors_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Save where?";
+            dialog.DefaultExt = ".pkactors";
+
+            var result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                var fileName = dialog.FileName;
+
+                using (var stream = new FileStream(fileName, FileMode.Create))
+                {
+                    SerializeItem(stream);
+                }
+            }
+        }
+
+        private void btnOpenActors_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+
+            dialog.Title = "Open what?";
+            dialog.DefaultExt = ".pkactors";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var fileName = dialog.FileName;
+
+                using (var stream = new FileStream(fileName, FileMode.Open))
+                {
+                    Text = "Loading...";
+                    // TODO
                 }
             }
         }

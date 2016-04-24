@@ -6,3 +6,4 @@ c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\D
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.csproj.GenerateResource.Cache
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.exe
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.pdb
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.csprojResolveAssemblyReference.cache

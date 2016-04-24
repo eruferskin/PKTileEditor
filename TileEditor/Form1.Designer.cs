@@ -39,9 +39,13 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGrid = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabActors = new System.Windows.Forms.TabPage();
+            this.actorSelect = new System.Windows.Forms.ListBox();
+            this.btnSaveActors = new System.Windows.Forms.Button();
+            this.btnOpenActors = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabGrid.SuspendLayout();
+            this.tabActors.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtColumns
@@ -111,9 +115,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(27, 893);
+            this.btnSave.Location = new System.Drawing.Point(33, 802);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(438, 68);
+            this.btnSave.Size = new System.Drawing.Size(371, 68);
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save world";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -121,9 +125,9 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(27, 967);
+            this.btnOpen.Location = new System.Drawing.Point(33, 889);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(438, 68);
+            this.btnOpen.Size = new System.Drawing.Size(371, 68);
             this.btnOpen.TabIndex = 10;
             this.btnOpen.Text = "Open world";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -133,16 +137,18 @@
             // 
             this.tabControl.AccessibleName = "";
             this.tabControl.Controls.Add(this.tabGrid);
-            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabActors);
             this.tabControl.Location = new System.Drawing.Point(23, 36);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(446, 851);
+            this.tabControl.Size = new System.Drawing.Size(446, 1007);
             this.tabControl.TabIndex = 11;
             // 
             // tabGrid
             // 
             this.tabGrid.Controls.Add(this.lblColumns);
+            this.tabGrid.Controls.Add(this.btnOpen);
+            this.tabGrid.Controls.Add(this.btnSave);
             this.tabGrid.Controls.Add(this.txtColumns);
             this.tabGrid.Controls.Add(this.txtRows);
             this.tabGrid.Controls.Add(this.brushSelect);
@@ -151,20 +157,53 @@
             this.tabGrid.Location = new System.Drawing.Point(4, 29);
             this.tabGrid.Name = "tabGrid";
             this.tabGrid.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGrid.Size = new System.Drawing.Size(438, 818);
+            this.tabGrid.Size = new System.Drawing.Size(438, 974);
             this.tabGrid.TabIndex = 0;
             this.tabGrid.Text = "Grid";
             this.tabGrid.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabActors
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(438, 818);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Actors";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabActors.Controls.Add(this.btnOpenActors);
+            this.tabActors.Controls.Add(this.actorSelect);
+            this.tabActors.Controls.Add(this.btnSaveActors);
+            this.tabActors.Location = new System.Drawing.Point(4, 29);
+            this.tabActors.Name = "tabActors";
+            this.tabActors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabActors.Size = new System.Drawing.Size(438, 974);
+            this.tabActors.TabIndex = 1;
+            this.tabActors.Text = "Actors";
+            this.tabActors.UseVisualStyleBackColor = true;
+            // 
+            // actorSelect
+            // 
+            this.actorSelect.FormattingEnabled = true;
+            this.actorSelect.ItemHeight = 20;
+            this.actorSelect.Location = new System.Drawing.Point(33, 27);
+            this.actorSelect.Name = "actorSelect";
+            this.actorSelect.Size = new System.Drawing.Size(371, 724);
+            this.actorSelect.TabIndex = 12;
+            this.actorSelect.SelectedIndexChanged += new System.EventHandler(this.actorSelect_SelectedIndexChanged);
+            // 
+            // btnSaveActors
+            // 
+            this.btnSaveActors.Location = new System.Drawing.Point(33, 783);
+            this.btnSaveActors.Name = "btnSaveActors";
+            this.btnSaveActors.Size = new System.Drawing.Size(371, 68);
+            this.btnSaveActors.TabIndex = 12;
+            this.btnSaveActors.Text = "Save actors";
+            this.btnSaveActors.UseVisualStyleBackColor = true;
+            this.btnSaveActors.Click += new System.EventHandler(this.btnSaveActors_Click);
+            // 
+            // btnOpenActors
+            // 
+            this.btnOpenActors.Location = new System.Drawing.Point(33, 879);
+            this.btnOpenActors.Name = "btnOpenActors";
+            this.btnOpenActors.Size = new System.Drawing.Size(371, 68);
+            this.btnOpenActors.TabIndex = 13;
+            this.btnOpenActors.Text = "Open actors";
+            this.btnOpenActors.UseVisualStyleBackColor = true;
+            this.btnOpenActors.Click += new System.EventHandler(this.btnOpenActors_Click);
             // 
             // Form1
             // 
@@ -173,15 +212,14 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1792, 1076);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.tileContainer);
-            this.Controls.Add(this.btnSave);
             this.Name = "Form1";
             this.Text = "TileEdit";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tabGrid.ResumeLayout(false);
             this.tabGrid.PerformLayout();
+            this.tabActors.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -198,7 +236,10 @@
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabGrid;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabActors;
+        private System.Windows.Forms.ListBox actorSelect;
+        private System.Windows.Forms.Button btnOpenActors;
+        private System.Windows.Forms.Button btnSaveActors;
     }
 }
 
