@@ -1,0 +1,8 @@
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\bin\Release\TileEditor.exe.config
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\bin\Release\TileEditor.exe
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\bin\Release\TileEditor.pdb
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\obj\Release\TileEditor.Form1.resources
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\obj\Release\TileEditor.Properties.Resources.resources
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\obj\Release\TileEditor.csproj.GenerateResource.Cache
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\obj\Release\TileEditor.exe
+C:\Users\Danne\Documents\Visual Studio 2015\Projects\TileEditor\TileEditor\obj\Release\TileEditor.pdb

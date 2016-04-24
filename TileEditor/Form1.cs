@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TileEditor
@@ -17,13 +11,14 @@ namespace TileEditor
         private World _world;
 
         private TileDefinition _seletedTile;
-        private int numberOfColumns;
-        private int numberOfRows;
+        private int _numberOfColumns;
+        private int _numberOfRows;
+        private const int _defaultRows = 10;
+        private const int _defaultColumns = 10;
 
         public Form1()
         { 
             InitializeComponent();
-            initializeEditor();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,25 +34,25 @@ namespace TileEditor
 
         private void initializeEditor()
         {
-            if (int.TryParse(txtColumns.Text, out numberOfColumns) && int.TryParse(txtRows.Text, out numberOfRows))
+            CreateGrid(_numberOfRows, _numberOfColumns);
+
+            _world = new World(_numberOfColumns, _numberOfRows);
+
+            for (int x = 0; x < _world.Width; x++)
             {
-                CreateGrid(numberOfRows, numberOfColumns);
-
-                _world = new World(numberOfColumns, numberOfRows);
-
-                for (int x = 0; x < _world.Width; x++)
+                for (int y = 0; y < _world.Height; y++)
                 {
-                    for (int y = 0; y < _world.Height; y++)
-                    {
-                        _world.SetTile(x, y, TileDefinition.Default);
-                    }
+                    _world.SetTile(x, y, TileDefinition.Default);
                 }
             }
         }
 
         private void btnGenerateGrid_Click(object sender, EventArgs e)
         {
-            initializeEditor();
+            if (int.TryParse(txtColumns.Text, out _numberOfColumns) && int.TryParse(txtRows.Text, out _numberOfRows))
+            {
+                initializeEditor();
+            }
         }
 
         private void CreateGrid(int numberOfRows, int numberOfColumns)
@@ -72,7 +67,7 @@ namespace TileEditor
 
             tileContainer.Width = totalWidth;
             tileContainer.Height = totalHeight;
-
+            
             var controlsToAdd = new List<Control>(numberOfColumns * numberOfRows);
 
             for (var row = 0; row < numberOfRows; row++)
@@ -89,7 +84,7 @@ namespace TileEditor
                     {
                         tile = _world.GetTile(column, row);
                     }
-                    
+
                     var panel = new Panel
                     {
                         Width = tileWidth,
@@ -127,9 +122,9 @@ namespace TileEditor
                 var rowNumber = 1;
                 var columnNumber = 0;
 
-                while(tileIndex >= numberOfColumns)
+                while(tileIndex >= _numberOfColumns)
                 {
-                    tileIndex -= numberOfColumns;
+                    tileIndex -= _numberOfColumns;
                     rowNumber++;
                 }
 
@@ -216,7 +211,9 @@ namespace TileEditor
                     _world = world;
 
                     CreateGrid(_world.Height, _world.Width);
-
+     
+                    _numberOfColumns = _world.Width > 0 ? _world.Width : _defaultColumns;
+                    _numberOfRows = _world.Height > 0 ? _world.Height : _defaultRows;
                     Text = "TileEdit - " + fileName;
                 }
             }
