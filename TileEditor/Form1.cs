@@ -93,7 +93,7 @@ namespace TileEditor
 
                     if (_world != null)
                     {
-                        if (tabControl.SelectedTab.Name == "tabGrid")
+                        if (tabControl.SelectedTab.Name == "tabTiles")
                         {
                             tile = (TileDefinition)_world.GetItem(column, row);
                         }
@@ -152,7 +152,7 @@ namespace TileEditor
                 x = columnNumber - 1;
                 y = rowNumber - 1;
 
-                if (tabControl.SelectedTab.Name == "tabGrid")
+                if (tabControl.SelectedTab.Name == "tabTiles")
                 {
                     _world.SetItem(x, y, _seletedTile);
                     tile.BackColor = _seletedTile.EditorColor;
@@ -169,10 +169,7 @@ namespace TileEditor
 
                     label.Parent = tile;
                 }
-               
-            }
-
-           
+            }  
         }
 
         private void SerializeItem(Stream stream)
@@ -287,21 +284,7 @@ namespace TileEditor
 
         private void btnOpenActors_Click(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog();
-
-            dialog.Title = "Open what?";
-            dialog.DefaultExt = ".pkactors";
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                var fileName = dialog.FileName;
-
-                using (var stream = new FileStream(fileName, FileMode.Open))
-                {
-                    Text = "Loading...";
-                    // TODO
-                }
-            }
+            MessageBox.Show("Not implemented");
         }
     }
 }
