@@ -31,6 +31,7 @@ namespace TileEditor
 
             _seletedTile = TileDefinition.Default;
             brushSelect.SelectedIndex = 0;
+            btnSave.Enabled = false;
         }
 
         private void initializeEditor()
@@ -107,6 +108,7 @@ namespace TileEditor
             }
 
             tileContainer.Controls.AddRange(controlsToAdd.ToArray());
+            btnSave.Enabled = true;
         }
 
         private void tile_Click(object sender, EventArgs e)
@@ -146,17 +148,14 @@ namespace TileEditor
             var context = new StreamingContext(StreamingContextStates.All);
             var formatter = new BinaryFormatter(selector, context);
 
-
             formatter.Serialize(stream, _world);
         }
 
         private World DeserializeWorld(Stream stream)
         {
-
             var selector = new SurrogateSelector();
             var context = new StreamingContext(StreamingContextStates.All);
-            var formatter = new BinaryFormatter(selector, context);
-            
+            var formatter = new BinaryFormatter(selector, context);   
 
             return formatter.Deserialize(stream) as World;
         }
@@ -172,7 +171,6 @@ namespace TileEditor
         private void brushSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedBrushName = (string)brushSelect.SelectedItem;
-
             var selectedBrush = TileProvider.GetBrush(selectedBrushName);
 
             brushSelect.BackColor = selectedBrush.EditorColor;

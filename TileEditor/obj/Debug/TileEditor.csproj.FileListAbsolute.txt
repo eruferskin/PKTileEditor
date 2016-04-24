@@ -1,7 +1,6 @@
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\bin\Debug\TileEditor.exe.config
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\bin\Debug\TileEditor.exe
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\bin\Debug\TileEditor.pdb
-c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.csprojResolveAssemblyReference.cache
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.Form1.resources
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.Properties.Resources.resources
 c:\users\danne\documents\visual studio 2015\Projects\TileEditor\TileEditor\obj\Debug\TileEditor.csproj.GenerateResource.Cache
