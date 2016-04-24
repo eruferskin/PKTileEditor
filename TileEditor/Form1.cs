@@ -23,6 +23,7 @@ namespace TileEditor
         public Form1()
         { 
             InitializeComponent();
+            initializeEditor();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace TileEditor
             brushSelect.SelectedIndex = 0;
         }
 
-        private void btnGenerateGrid_Click(object sender, EventArgs e)
+        private void initializeEditor()
         {
             if (int.TryParse(txtColumns.Text, out numberOfColumns) && int.TryParse(txtRows.Text, out numberOfRows))
             {
@@ -52,7 +53,11 @@ namespace TileEditor
                     }
                 }
             }
-            
+        }
+
+        private void btnGenerateGrid_Click(object sender, EventArgs e)
+        {
+            initializeEditor();
         }
 
         private void CreateGrid(int numberOfRows, int numberOfColumns)
