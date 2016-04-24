@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
@@ -58,6 +59,7 @@ namespace TileEditor
         private void CreateGrid(int numberOfRows, int numberOfColumns)
         {
             tileContainer.Controls.Clear();
+            btnGenerateGrid.Enabled = false;
 
             int tileWidth = 40;
             int tileHeight = 40;
@@ -102,7 +104,6 @@ namespace TileEditor
 
                     controlsToAdd.Add(panel);
                 }
-
             }
 
             tileContainer.Controls.AddRange(controlsToAdd.ToArray());
@@ -141,14 +142,21 @@ namespace TileEditor
 
         private void SerializeWorld(Stream stream)
         {
-            var formatter = new BinaryFormatter();
+            var selector = new SurrogateSelector();
+            var context = new StreamingContext(StreamingContextStates.All);
+            var formatter = new BinaryFormatter(selector, context);
+
 
             formatter.Serialize(stream, _world);
         }
 
         private World DeserializeWorld(Stream stream)
         {
-            var formatter = new BinaryFormatter();
+
+            var selector = new SurrogateSelector();
+            var context = new StreamingContext(StreamingContextStates.All);
+            var formatter = new BinaryFormatter(selector, context);
+            
 
             return formatter.Deserialize(stream) as World;
         }

@@ -98,7 +98,7 @@
             // 
             this.brushSelect.FormattingEnabled = true;
             this.brushSelect.ItemHeight = 20;
-            this.brushSelect.Location = new System.Drawing.Point(29, 343);
+            this.brushSelect.Location = new System.Drawing.Point(29, 346);
             this.brushSelect.Name = "brushSelect";
             this.brushSelect.Size = new System.Drawing.Size(252, 444);
             this.brushSelect.TabIndex = 8;
@@ -106,7 +106,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(29, 802);
+            this.btnSave.Location = new System.Drawing.Point(29, 805);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(252, 68);
             this.btnSave.TabIndex = 9;
@@ -116,7 +116,7 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(29, 876);
+            this.btnOpen.Location = new System.Drawing.Point(29, 879);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(252, 68);
             this.btnOpen.TabIndex = 10;
